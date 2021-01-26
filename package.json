@@ -9,7 +9,7 @@
     "watch": "webpack -w --mode development"
   },
   "keywords": [],
-  "author": "",
+  "author": "Guille",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.10",
