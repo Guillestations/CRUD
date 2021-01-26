@@ -2,14 +2,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import '../css/style.css';
 import Funko from './funko.js';
+import $ from 'jquery';
 
 
 //Inicializo variables
 let productos = [];
 leerProductos();
 
-window.agregarProducto = function (event) {
-    event.preventDefault();
+window.agregarProducto = function () {
+    
     console.log("desde agregar producto");
 
     //crear variables
@@ -92,7 +93,7 @@ function dibujarFilas(_productos) {
         <td>$${_productos[i].precio}</td>
         <td>${_productos[i].imagen}</td>
         <td>
-            <button class="btn btn-outline-info">Editar</button>
+            <button class="btn btn-outline-info" onclick="editarProducto(${_productos[i].codigo})">Editar</button>
             <button class="btn btn-outline-danger" onclick="eliminarProducto(this)" id="${_productos[i].codigo}">Borrar</button>
         </td>
     </tr>`
@@ -109,7 +110,7 @@ function borrarFilas(){
     }
 }
 
-window.eliminarProducto = function(prod){
+window.eliminarProducto = function(prod) {
     console.log(prod);
 
     //Opcion 1 buscar un objeto en el arreglo
@@ -127,6 +128,30 @@ window.eliminarProducto = function(prod){
     localStorage.setItem("funkopopKey", JSON.stringify(arregloFiltrado));
     productos = arregloFiltrado;
     leerProductos();
-    
+
     console.log(arregloFiltrado);
+}
+
+window.editarProducto = function (codigo){
+    console.log(codigo);
+
+    let modalProducto = document.getElementById('modalProducto');
+    //buscar producto usamos find -> trae el producto que corresponde a la condicion que le coloquemos
+    
+    let objetoEncontrado = productos.find(function (producto) {
+        return productos.codigo == codigo; 
+    })
+    console.log(objetoEncontrado);
+
+    //cargar en el modal los datos del objeto que quiero editar
+    document.getElementById('codigo').value = objetoEncontrado.codigo;
+    document.getElementById('nombre').value = objetoEncontrado.nombre;
+    document.getElementById('numSerie').value = objetoEncontrado.numSerie;
+    document.getElementById('categoria').value = objetoEncontrado.categoria;
+    document.getElementById('descripcion').value = objetoEncontrado.descripcion;
+    document.getElementById('stock').value = objetoEncontrado.stock;
+    document.getElementById('precio').value = objetoEncontrado.precio;
+    document.getElementById('imagen').value = objetoEncontrado.imagen;
+    //abrir la ventana modal
+    $(modalProducto).modal('show');
 }
