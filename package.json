@@ -1,18 +1,15 @@
 {
   "name": "funko",
   "version": "1.0.0",
-  "homepage": "http://Guillestations.github.io/CRUD",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode development",
     "prod": "webpack -p",
-    "watch": "webpack -w --mode development",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "watch": "webpack -w --mode development"
   },
   "keywords": [],
-  "author": "Guille",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.10",
